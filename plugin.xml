@@ -38,7 +38,7 @@
          <header-file src="src/ios/CDVPluginExt.h" />
          <source-file src="src/ios/CDVPluginExt.m" />
          <header-file src="src/ios/GenericAdPlugin.h" />
-         <source-file src="src/ios/PluginAdapterDelegate.h" />
+         <header-file src="src/ios/PluginAdapterDelegate.h" />
          
         <framework src="AdSupport.framework"/>
         <framework src="StoreKit.framework"/>
