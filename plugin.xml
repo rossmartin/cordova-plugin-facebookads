@@ -23,7 +23,6 @@
         <clobbers target="window.FacebookAds" />
     </js-module>
 
-	<dependency id="cordova-plugin-extension"/>
 	<dependency id="cordova-facebook-audnet-sdk" url="https://github.com/rossmartin/cordova-facebook-audnet-sdk" />
 
     <!-- android -->
