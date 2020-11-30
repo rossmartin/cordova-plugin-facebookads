@@ -489,51 +489,51 @@
 - (void) fireNativeAdLoadEvent:(FBNativeAd*)nativeAd
 {
     [self.nativeads enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSString* adId = (NSString*) key;
+        //NSString* adId = (NSString*) key;
         FlexNativeAd* unit = (FlexNativeAd*) obj;
         if(unit && unit.ad == nativeAd) {
-            NSString *titleForAd = nativeAd.title;
-            NSString *bodyTextForAd = nativeAd.body;
-            FBAdImage *coverImage = nativeAd.coverImage;
-            FBAdImage *iconForAd = nativeAd.icon;
-            NSString *socialContextForAd = nativeAd.socialContext;
-            struct FBAdStarRating appRatingForAd = nativeAd.starRating;
-            NSString *titleForAdButton = nativeAd.callToAction;
-            
-            NSMutableDictionary* coverInfo = [[NSMutableDictionary alloc] init];
-            [coverInfo setValue:[coverImage.url absoluteString] forKey:@"url"];
-            [coverInfo setValue:[NSNumber numberWithInt:coverImage.width] forKey:@"width"];
-            [coverInfo setValue:[NSNumber numberWithInt:coverImage.height] forKey:@"height"];
-            
-            NSMutableDictionary* iconInfo = [[NSMutableDictionary alloc] init];
-            [iconInfo setValue:[iconForAd.url absoluteString] forKey:@"url"];
-            [iconInfo setValue:[NSNumber numberWithInt:iconForAd.width] forKey:@"width"];
-            [iconInfo setValue:[NSNumber numberWithInt:iconForAd.height] forKey:@"height"];
-            
-            NSMutableDictionary* adRes = [[NSMutableDictionary alloc] init];
-            [adRes setValue:coverInfo forKey:@"coverImage"];
-            [adRes setValue:iconInfo forKey:@"icon"];
-            [adRes setValue:titleForAd forKey:@"title"];
-            [adRes setValue:bodyTextForAd forKey:@"body"];
-            [adRes setValue:socialContextForAd forKey:@"socialContext"];
-            [adRes setValue:[NSNumber numberWithFloat:appRatingForAd.value] forKey:@"rating"];
-            [adRes setValue:[NSNumber numberWithInt:appRatingForAd.scale] forKey:@"ratingScale"];
-            [adRes setValue:titleForAdButton forKey:@"buttonText"];
-            
-            NSMutableDictionary* json = [[NSMutableDictionary alloc] init];
-            [json setValue:[self __getProductShortName] forKey:@"adNetwork"];
-            [json setValue:EVENT_AD_LOADED forKey:@"adEvent"];
-            [json setValue:ADTYPE_NATIVE forKey:@"adType"];
-            [json setValue:adId forKey:@"adId"];
-            [json setValue:adRes forKey:@"adRes"];
-            
-            NSError * err;
-            NSData * jsonData = [NSJSONSerialization dataWithJSONObject:json options:0 error:&err];
-            NSString * jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-            
-            [unit.ad registerViewForInteraction:unit.view withViewController:[self getViewController]];
-            
-            [self fireEvent:[self __getProductShortName] event:EVENT_AD_LOADED withData:jsonStr];
+//            NSString *titleForAd = nativeAd.title;
+//            NSString *bodyTextForAd = nativeAd.body;
+//            FBAdImage *coverImage = nativeAd.coverImage;
+//            FBAdImage *iconForAd = nativeAd.icon;
+//            NSString *socialContextForAd = nativeAd.socialContext;
+//            struct FBAdStarRating appRatingForAd = nativeAd.starRating;
+//            NSString *titleForAdButton = nativeAd.callToAction;
+//
+//            NSMutableDictionary* coverInfo = [[NSMutableDictionary alloc] init];
+//            [coverInfo setValue:[coverImage.url absoluteString] forKey:@"url"];
+//            [coverInfo setValue:[NSNumber numberWithInt:coverImage.width] forKey:@"width"];
+//            [coverInfo setValue:[NSNumber numberWithInt:coverImage.height] forKey:@"height"];
+//
+//            NSMutableDictionary* iconInfo = [[NSMutableDictionary alloc] init];
+//            [iconInfo setValue:[iconForAd.url absoluteString] forKey:@"url"];
+//            [iconInfo setValue:[NSNumber numberWithInt:iconForAd.width] forKey:@"width"];
+//            [iconInfo setValue:[NSNumber numberWithInt:iconForAd.height] forKey:@"height"];
+//
+//            NSMutableDictionary* adRes = [[NSMutableDictionary alloc] init];
+//            [adRes setValue:coverInfo forKey:@"coverImage"];
+//            [adRes setValue:iconInfo forKey:@"icon"];
+//            [adRes setValue:titleForAd forKey:@"title"];
+//            [adRes setValue:bodyTextForAd forKey:@"body"];
+//            [adRes setValue:socialContextForAd forKey:@"socialContext"];
+//            [adRes setValue:[NSNumber numberWithFloat:appRatingForAd.value] forKey:@"rating"];
+//            [adRes setValue:[NSNumber numberWithInt:appRatingForAd.scale] forKey:@"ratingScale"];
+//            [adRes setValue:titleForAdButton forKey:@"buttonText"];
+//
+//            NSMutableDictionary* json = [[NSMutableDictionary alloc] init];
+//            [json setValue:[self __getProductShortName] forKey:@"adNetwork"];
+//            [json setValue:EVENT_AD_LOADED forKey:@"adEvent"];
+//            [json setValue:ADTYPE_NATIVE forKey:@"adType"];
+//            [json setValue:adId forKey:@"adId"];
+//            [json setValue:adRes forKey:@"adRes"];
+//
+//            NSError * err;
+//            NSData * jsonData = [NSJSONSerialization dataWithJSONObject:json options:0 error:&err];
+//            NSString * jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//
+//            [unit.ad registerViewForInteraction:unit.view withViewController:[self getViewController]];
+//
+//            [self fireEvent:[self __getProductShortName] event:EVENT_AD_LOADED withData:jsonStr];
             
             *stop = YES;
         }
