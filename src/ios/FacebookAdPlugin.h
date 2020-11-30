@@ -26,13 +26,4 @@
 - (void) __resumeAdView:(UIView*)view;
 - (void) __destroyAdView:(UIView*)view;
 
-- (NSObject*) __createInterstitial:(NSString*)adId;
-- (void) __loadInterstitial:(NSObject*)interstitial;
-- (void) __showInterstitial:(NSObject*)interstitial;
-- (void) __destroyInterstitial:(NSObject*)interstitial;
-
-- (void)createNativeAd:(CDVInvokedUrlCommand *)command;
-- (void)removeNativeAd:(CDVInvokedUrlCommand *)command;
-- (void)setNativeAdClickArea:(CDVInvokedUrlCommand *)command;
-
 @end
