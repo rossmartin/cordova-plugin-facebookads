@@ -103,7 +103,7 @@
 
 - (void)adView:(FBAdView *)adView didFailWithError:(NSError *)error
 {
-  [self fireEvent:NULL event:@"didFailWithError" withData:NULL];
+  [self fireEvent:NULL event:@"didFailWithError" withData:error.localizedDescription];
 }
 
 - (void)adViewWillLogImpression:(FBAdView *)adView
