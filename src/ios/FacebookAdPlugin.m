@@ -61,8 +61,6 @@
 
 - (void)adViewDidLoad:(FBAdView *)adView
 {
-    [self fireEvent:NULL event:@"adViewDidLoad" withData:NULL];
-  
     if (self.adView && self.adView.isAdValid) {
       CGRect webViewBounds = self.webView.bounds;
       NSLog(@"webViewBounds, %f by %f", webViewBounds.size.width, webViewBounds.size.height);
@@ -88,6 +86,8 @@
       self.webView.frame = window;
       
       [self.webView.superview addSubview:self.adView];
+      
+      [self fireEvent:NULL event:@"adViewDidLoad" withData:NULL];
     }
 }
 
