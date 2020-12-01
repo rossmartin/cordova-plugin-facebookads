@@ -37,25 +37,19 @@
   
   self.adView = [[FBAdView alloc] initWithPlacementID:adId
                                   adSize:kFBAdSizeHeight50Banner
-                                  rootViewController:self.viewController];
+                                   rootViewController:self.viewController];
   
   self.adView.delegate = self;
   
   self.adView.autoresizingMask =
-  UIViewAutoresizingFlexibleRightMargin |
-  UIViewAutoresizingFlexibleLeftMargin|
-  UIViewAutoresizingFlexibleWidth |
-  UIViewAutoresizingFlexibleTopMargin;
+    UIViewAutoresizingFlexibleRightMargin |
+    UIViewAutoresizingFlexibleLeftMargin|
+    UIViewAutoresizingFlexibleWidth |
+    UIViewAutoresizingFlexibleTopMargin;
   
   [self.adView loadAd];
-}
-
-- (void) __loadAdView:(UIView*)view
-{
-    if([view isKindOfClass:[FBAdView class]]) {
-        FBAdView* ad = (FBAdView*) view;
-        [ad loadAd];
-    }
+  
+  [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"success"] callbackId:command.callbackId];
 }
 
 - (void) __pauseAdView:(UIView*)view
@@ -95,6 +89,21 @@
 - (void)adViewDidLoad:(FBAdView *)adView
 {
     [self fireEvent:NULL event:@"adViewDidLoad" withData:NULL];
+    if (self.adView && self.adView.isAdValid) {
+      CGRect webViewBounds = self.webView.bounds;
+      NSLog(@"webViewBounds, %f by %f", webViewBounds.size.width, webViewBounds.size.height);
+      
+      // move the ad to the bottom
+      self.adView.frame = CGRectMake(0, webViewBounds.size.height - self.adView.frame.size.height, self.adView.frame.size.width, self.adView.frame.size.height);
+      
+      // resize the webview to accommodate for the ad
+      CGRect window = CGRectMake(webViewBounds.origin.x, webViewBounds.origin.y, webViewBounds.size.width, webViewBounds.size.height - self.adView.frame.size.height);
+      
+      self.webView.bounds = window;
+      self.webView.frame = window;
+      
+      [self.webView.superview addSubview:self.adView];
+    }
 }
 
 - (void)adViewDidClick:(FBAdView *)adView

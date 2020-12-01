@@ -16,10 +16,7 @@
 - (void)showBanner:(CDVInvokedUrlCommand *)command;
 - (void)hideBanner:(CDVInvokedUrlCommand *)command;
 - (void)removeBanner:(CDVInvokedUrlCommand *)command;
-- (void)getAdSettings:(CDVInvokedUrlCommand *)command;
-- (void)setOptions:(CDVInvokedUrlCommand *)command;
 
-@property (nonatomic, retain) NSString* bannerId;
 @property (nonatomic, retain) FBAdView *adView;
 
 @end
