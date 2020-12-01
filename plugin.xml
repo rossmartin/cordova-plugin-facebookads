@@ -33,12 +33,6 @@
          </config-file>
          <header-file src="src/ios/FacebookAdPlugin.h" />
          <source-file src="src/ios/FacebookAdPlugin.m" />
-         <header-file src="src/ios/UITapGestureRecognizer+Spec.h" />
-         <source-file src="src/ios/UITapGestureRecognizer+Spec.m" />
-         <header-file src="src/ios/CDVPluginExt.h" />
-         <source-file src="src/ios/CDVPluginExt.m" />
-         <header-file src="src/ios/GenericAdPlugin.h" />
-         <header-file src="src/ios/PluginAdapterDelegate.h" />
          
         <framework src="AdSupport.framework"/>
         <framework src="StoreKit.framework"/>

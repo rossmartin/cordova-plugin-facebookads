@@ -1,29 +1,25 @@
-//
-//  FacebookAdPlugin.h
-//  TestAdMobCombo
-//
-//  Created by Xie Liming on 14-11-8.
-//
-//
+#import <Cordova/CDVPlugin.h>
 
-#import "GenericAdPlugin.h"
+#define EVENT_AD_LOADED         @"onAdLoaded"
+#define EVENT_AD_FAILLOAD       @"onAdFailLoad"
+#define EVENT_AD_PRESENT        @"onAdPresent"
+#define EVENT_AD_LEAVEAPP       @"onAdLeaveApp"
+#define EVENT_AD_DISMISS        @"onAdDismiss"
+#define EVENT_AD_WILLPRESENT    @"onAdWillPresent"
+#define EVENT_AD_WILLDISMISS    @"onAdWillDismiss"
+#define OPT_DEVICE_HASH         @"deviceHash"
+#define OPT_ADID                @"adId"
 
-@interface FacebookAdPlugin : GenericAdPlugin
+@interface FacebookAdPlugin : CDVPlugin
 
-- (void)pluginInitialize;
+- (void)createBanner:(CDVInvokedUrlCommand *)command;
+- (void)showBanner:(CDVInvokedUrlCommand *)command;
+- (void)hideBanner:(CDVInvokedUrlCommand *)command;
+- (void)removeBanner:(CDVInvokedUrlCommand *)command;
+- (void)getAdSettings:(CDVInvokedUrlCommand *)command;
+- (void)setOptions:(CDVInvokedUrlCommand *)command;
 
-- (void) parseOptions:(NSDictionary *)options;
-
-- (NSString*) __getProductShortName;
-- (NSString*) __getTestBannerId;
-- (NSString*) __getTestInterstitialId;
-
-- (UIView*) __createAdView:(NSString*)adId;
-- (int) __getAdViewWidth:(UIView*)view;
-- (int) __getAdViewHeight:(UIView*)view;
-- (void) __loadAdView:(UIView*)view;
-- (void) __pauseAdView:(UIView*)view;
-- (void) __resumeAdView:(UIView*)view;
-- (void) __destroyAdView:(UIView*)view;
+@property (nonatomic, retain) NSString* bannerId;
+@property (nonatomic, retain) FBAdView *adView;
 
 @end
