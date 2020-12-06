@@ -69,18 +69,19 @@
       
       if (@available(iOS 11.0, *)) {
           UIWindow *window = UIApplication.sharedApplication.windows.firstObject;
-          bottomPadding = window.safeAreaInsets.bottom;
+          bottomPadding = window.safeAreaInsets.bottom - 12;
       }
       
       NSLog(@"bottomPadding = %f", bottomPadding);
       
       CGFloat adSizeWithPadding = bottomPadding + self.adView.frame.size.height;
+      CGFloat paddingBetweenWebViewAndAd = 20;
       
       // move the ad to the bottom
       self.adView.frame = CGRectMake(0, webViewBounds.size.height - adSizeWithPadding, self.adView.frame.size.width, self.adView.frame.size.height);
       
       // resize the webview to accommodate for the ad
-      CGRect window = CGRectMake(webViewBounds.origin.x, webViewBounds.origin.y, webViewBounds.size.width, webViewBounds.size.height - adSizeWithPadding);
+      CGRect window = CGRectMake(webViewBounds.origin.x, webViewBounds.origin.y, webViewBounds.size.width, webViewBounds.size.height - adSizeWithPadding - paddingBetweenWebViewAndAd);
       
       self.webView.bounds = window;
       self.webView.frame = window;
