@@ -9,6 +9,11 @@
 
 @implementation FacebookAdPlugin
 
+- (void) pluginInitialize
+{
+  [FBAdSettings setAdvertiserTrackingEnabled:NO];
+}
+
 - (void) createBanner:(CDVInvokedUrlCommand *)command
 {
   NSDictionary* options = [command.arguments objectAtIndex:0];
