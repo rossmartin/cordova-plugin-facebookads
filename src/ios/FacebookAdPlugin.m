@@ -1,6 +1,7 @@
 #import <FBAudienceNetwork/FBAudienceNetwork.h>
 #import <Cordova/CDVPlugin.h>
 #import "FacebookAdPlugin.h"
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 @interface FacebookAdPlugin()<FBAdViewDelegate>
 
@@ -9,13 +10,31 @@
 
 @implementation FacebookAdPlugin
 
-- (void) pluginInitialize
-{
-  [FBAdSettings setAdvertiserTrackingEnabled:NO];
-}
-
 - (void) createBanner:(CDVInvokedUrlCommand *)command
 {
+  if (@available(iOS 14, *)) {
+    [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+      switch(status) {
+        case ATTrackingManagerAuthorizationStatusAuthorized:
+          [FBAdSettings setAdvertiserTrackingEnabled:YES];
+          break;
+        case ATTrackingManagerAuthorizationStatusDenied:
+        case ATTrackingManagerAuthorizationStatusRestricted:
+        case ATTrackingManagerAuthorizationStatusNotDetermined:
+          [FBAdSettings setAdvertiserTrackingEnabled:NO];
+          break;
+      }
+      
+      [self handleCreateBannner:command];
+    }];
+  } else {
+    [FBAdSettings setAdvertiserTrackingEnabled:YES];
+    [self handleCreateBannner:command];
+  }
+}
+
+
+- (void) handleCreateBannner:(CDVInvokedUrlCommand *)command {
   NSDictionary* options = [command.arguments objectAtIndex:0];
   
   NSString* adId = [options objectForKey:OPT_ADID];
